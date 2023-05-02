@@ -20,7 +20,7 @@ class ZolozSdk {
     } catch (e) {
       return CheckResultResponseModel(
           result: CheckResultResponseModelResult(
-              resultMessage: "Unknown Error $e", resultCode: "FAILED"));
+              resultMessage: "Unknown Error", resultCode: "FAILED"));
     }
   }
 }
