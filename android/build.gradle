@@ -1,0 +1,53 @@
+group 'id.agen.zoloz_sdk'
+version '1.0-SNAPSHOT'
+
+buildscript {
+    ext.kotlin_version = '1.7.10'
+    repositories {
+        google()
+        mavenCentral()
+    }
+
+    dependencies {
+        classpath 'com.android.tools.build:gradle:7.2.0'
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+    }
+}
+
+allprojects {
+    repositories {
+        google()
+        mavenCentral()
+    }
+}
+
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+
+android {
+    compileSdkVersion 33
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+
+    sourceSets {
+        main.java.srcDirs += 'src/main/kotlin'
+    }
+31
+    defaultConfig {
+        minSdkVersion 21
+    }
+
+    dependencies {
+        implementation 'com.alibaba:fastjson:1.2.83'
+        implementation "com.squareup.okio:okio:1.17.4@jar"
+        implementation 'com.zoloz.android.build:zolozkit:1.2.13.230404102843'
+        implementation("com.airbnb.android:lottie:2.8.0")
+    }
+}
