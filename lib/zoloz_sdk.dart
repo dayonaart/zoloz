@@ -9,7 +9,7 @@ import 'package:flutter/services.dart';
 
 class ZolozSdk {
   final MethodChannel _methodChannel = const MethodChannel("zoloz_sdk");
-  Future<CheckResultResponseModel> startZoloz({
+  Future<CheckResultResponseModel?> startZoloz({
     @required String? initServer,
     @required String? checkServer,
   }) async {
