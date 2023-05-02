@@ -17,7 +17,7 @@ import io.flutter.plugin.common.MethodChannel.MethodCallHandler
 import io.flutter.plugin.common.MethodChannel.Result
 import java.io.File
 import java.io.IOException
-
+import android.widget.Toast  
 /** ZolozSdkPlugin */
 class ZolozSdkPlugin: FlutterPlugin, MethodCallHandler,ActivityAware {
   /// The MethodChannel that will the communication between Flutter and native Android
@@ -69,7 +69,8 @@ class ZolozSdkPlugin: FlutterPlugin, MethodCallHandler,ActivityAware {
       request.bizConfig[ZLZConstants.PUBLIC_KEY] = initResponse.rsaPubKey
       request.bizConfig[ZLZConstants.LOCALE] = "in-ID"
       request.bizConfig[ZLZConstants.CHAMELEON_CONFIG_PATH] = uIConfig
-      mHandler!!.postAtFrontOfQueue {
+     try {
+       mHandler!!.postAtFrontOfQueue {
         zlzFacade.start(request, object : IZLZCallback {
           override fun onCompleted(response: ZLZResponse) {
             runOnIoThread {
@@ -82,6 +83,10 @@ class ZolozSdkPlugin: FlutterPlugin, MethodCallHandler,ActivityAware {
           }
         })
       }
+     }
+     catch(Exception e) {
+     Toast.makeText(context,"$e",Toast.LENGTH_SHORT).show()  
+     }
     }
   }
 

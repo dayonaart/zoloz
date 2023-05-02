@@ -13,20 +13,16 @@ class ZolozSdk {
     @required String? initServer,
     @required String? checkServer,
   }) async {
+    var _res = await _methodChannel
+        .invokeMethod("startZoloz", {"init": initServer, "check": checkServer});
     try {
-      var _res = await _methodChannel.invokeMethod(
-          "startZoloz", {"init": initServer, "check": checkServer});
-      try {
-        return CheckResultResponseModel.fromJson(jsonDecode(_res));
-      } catch (e) {
-        return CheckResultResponseModel(
-            result: CheckResultResponseModelResult(
-                resultCode: _res,
-                resultMessage: "Unknow ERROR",
-                resultStatus: "FAILED OR RETRY"));
-      }
+      return CheckResultResponseModel.fromJson(jsonDecode(_res));
     } catch (e) {
-      return null;
+      return CheckResultResponseModel(
+          result: CheckResultResponseModelResult(
+              resultCode: _res,
+              resultMessage: "Unknow ERROR",
+              resultStatus: "FAILED OR RETRY"));
     }
   }
 }
