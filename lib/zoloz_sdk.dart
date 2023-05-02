@@ -9,16 +9,20 @@ import 'package:flutter/services.dart';
 
 class ZolozSdk {
   final MethodChannel _methodChannel = const MethodChannel("zoloz_sdk");
-  Future<CheckResultResponseModel?> startZoloz({
+  Future<CheckResultResponseModel> startZoloz({
     @required String? initServer,
     @required String? checkServer,
   }) async {
+    var _res = await _methodChannel
+        .invokeMethod("startZoloz", {"init": initServer, "check": checkServer});
     try {
-      var _res = await _methodChannel.invokeMethod(
-          "startZoloz", {"init": initServer, "check": checkServer});
       return CheckResultResponseModel.fromJson(jsonDecode(_res));
     } catch (e) {
-      return null;
+      return CheckResultResponseModel(
+          result: CheckResultResponseModelResult(
+              resultCode: _res,
+              resultMessage: "Unknow ERROR",
+              resultStatus: "FAILED OR RETRY"));
     }
   }
 }
