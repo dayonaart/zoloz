@@ -18,11 +18,7 @@ class ZolozSdk {
           "startZoloz", {"init": initServer, "check": checkServer});
       return CheckResultResponseModel.fromJson(jsonDecode(_res));
     } catch (e) {
-      return CheckResultResponseModel(
-          result: CheckResultResponseModelResult(
-              resultMessage: "Unknown Error",
-              resultCode:
-                  "${e.toString().substring(e.toString().indexOf("Z"))}"));
+      return null;
     }
   }
 }
