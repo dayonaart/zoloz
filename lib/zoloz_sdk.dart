@@ -20,7 +20,8 @@ class ZolozSdk {
     } catch (e) {
       return CheckResultResponseModel(
           result: CheckResultResponseModelResult(
-              resultMessage: "Unknown Error", resultCode: "FAILED"));
+              resultMessage: "Unknown Error",
+              resultCode: "${e.toString().replaceAll("^", "").trim()}"));
     }
   }
 }
