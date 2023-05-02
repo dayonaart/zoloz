@@ -21,7 +21,8 @@ class ZolozSdk {
       return CheckResultResponseModel(
           result: CheckResultResponseModelResult(
               resultMessage: "Unknown Error",
-              resultCode: "${e.toString().replaceAll("^", "").trim()}"));
+              resultCode:
+                  "${e.toString().substring(e.toString().indexOf("Z"))}"));
     }
   }
 }
