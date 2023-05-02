@@ -60,6 +60,7 @@ class ZolozSdkPlugin: FlutterPlugin, MethodCallHandler,ActivityAware {
     val initServer=args["init"]
     val checkServer=args["check"]
     runOnIoThread {
+     try {
       val initRequest: String? = initRequest(initServer!!,"$time")
       val initResponse = JSON.parseObject(initRequest, InitResponse::class.java)
       val zlzFacade = ZLZFacade.getInstance()
@@ -69,7 +70,6 @@ class ZolozSdkPlugin: FlutterPlugin, MethodCallHandler,ActivityAware {
       request.bizConfig[ZLZConstants.PUBLIC_KEY] = initResponse.rsaPubKey
       request.bizConfig[ZLZConstants.LOCALE] = "in-ID"
       request.bizConfig[ZLZConstants.CHAMELEON_CONFIG_PATH] = uIConfig
-     try {
        mHandler!!.postAtFrontOfQueue {
         zlzFacade.start(request, object : IZLZCallback {
           override fun onCompleted(response: ZLZResponse) {
