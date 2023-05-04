@@ -63,14 +63,10 @@ class ZolozSdkPlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
         runOnIoThread {
             try {
                 val initRequest: String? = initRequest(initServer!!, "$time")
-                if (initRequest.isNullOrEmpty()) {
+                if (initRequest.isNullOrEmpty()){
                     activity.runOnUiThread {
-                        Toast.makeText(
-                            context,
-                            "Make sure you have start microservices correctly",
-                            Toast.LENGTH_LONG
-                        ).show()
-                        result.success("000")
+                        Toast.makeText(context, "Make sure you have started microservices correctly", Toast.LENGTH_SHORT).show()
+                        result.success("00")
                     }
                     return@runOnIoThread
                 }
@@ -99,7 +95,7 @@ class ZolozSdkPlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
                 }
             } catch (e: Exception) {
                 activity.runOnUiThread {
-                    Toast.makeText(context, "$e", Toast.LENGTH_LONG).show()
+                    Toast.makeText(context, "$e", Toast.LENGTH_SHORT).show()
                 }
             }
         }
