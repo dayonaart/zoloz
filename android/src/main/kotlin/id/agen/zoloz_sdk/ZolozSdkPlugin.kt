@@ -84,7 +84,7 @@ class ZolozSdkPlugin: FlutterPlugin, MethodCallHandler,ActivityAware {
         })
       }
      }
-     catch(Exception e) {
+     catch(e:Exception) {
             runOnIoThread {
      Toast.makeText(context,"$e",Toast.LENGTH_SHORT).show()  
            }
