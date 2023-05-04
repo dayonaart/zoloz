@@ -76,12 +76,17 @@ class CheckResultResponseModel {
     this.extInfo,
   });
   CheckResultResponseModel.fromJson(Map<String, dynamic> json) {
-    result = (json['result'] != null)
-        ? CheckResultResponseModelResult.fromJson(json['result'])
-        : null;
-    extInfo = (json['extInfo'] != null)
-        ? CheckResultResponseModelExtInfo.fromJson(json['extInfo'])
-        : null;
+    try {
+      result = (json['result'] != null)
+          ? CheckResultResponseModelResult.fromJson(json['result'])
+          : null;
+      extInfo = (json['extInfo'] != null)
+          ? CheckResultResponseModelExtInfo.fromJson(json['extInfo'])
+          : null;
+    } catch (e) {
+      result = CheckResultResponseModelResult(resultCode: "0");
+      extInfo = null;
+    }
   }
   Map<String, dynamic> toJson() {
     final data = <String, dynamic>{};

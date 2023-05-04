@@ -11,6 +11,7 @@ import java.io.DataOutputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 
 public class LocalRequest implements IRequest {
     public String request(String requestUrl, String requestData) {
@@ -33,7 +34,7 @@ public class LocalRequest implements IRequest {
             if (HttpURLConnection.HTTP_OK == resultCode) {
                 StringBuilder sb = new StringBuilder();
                 String readLine;
-                BufferedReader responseReader = new BufferedReader(new InputStreamReader(httpConn.getInputStream(), "UTF-8"));
+                BufferedReader responseReader = new BufferedReader(new InputStreamReader(httpConn.getInputStream(), StandardCharsets.UTF_8));
                 while ((readLine = responseReader.readLine()) != null) {
                     sb.append(readLine).append("\n");
                 }
@@ -41,7 +42,7 @@ public class LocalRequest implements IRequest {
                 return sb.toString();
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            return "";
         }
         return "";
     }
